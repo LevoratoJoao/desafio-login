@@ -1,0 +1,43 @@
+{% extends "desafio/layout.html" %}
+{% block body %}
+
+    <h2>Registrar</h2>
+
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="username" class="form-label">Nome: </label>
+            {{ form.username }}
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email: </label>
+            {{ form.email }}
+        </div>
+        <div class="mb-3">
+            <label for="password1" class="form-label">Senha: </label>
+            {{ form.password1 }}
+        </div>
+        <div class="mb-3">
+            <label for="password2" class="form-label">Confirme a senha: </label>
+            {{ form.password2 }}
+        </div>
+        <div class="mb-3">
+            <input type="checkbox" onclick="myFunction()"> Mostrar senha
+        </div>
+        <input class="btn btn-primary" type="submit" value="Register">
+      </form>
+
+      {% for message in messages %}
+        <div>{{ message }}</div>
+      {% endfor %}
+
+      <script>
+        function myFunction() {
+            let passwords = [document.getElementById("id_password1"), document.getElementById("id_password2")];
+            passwords.forEach(password => {
+                password.type = password.type === "password" ? "text" : "password";
+            });
+        }
+      </script>
+
+{% endblock %}
